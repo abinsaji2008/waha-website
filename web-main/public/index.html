@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>WAHA Control</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+
+    margin: 0;
+
+    font-family:
+        Inter,
+        Arial,
+        sans-serif;
+
+    color: white;
+
+    background:
+        radial-gradient(
+            circle at 10% 10%,
+            #163b2a,
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 90% 90%,
+            #11294a,
+            transparent 35%
+        ),
+        #05070b;
+
+    min-height: 100vh;
+
+}
+
+
+.container {
+
+    width: min(1200px, 94%);
+
+    margin: auto;
+
+    padding: 30px 0 50px;
+
+}
+
+
+header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 25px;
+
+}
+
+
+.logo {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+}
+
+
+.logoIcon {
+
+    width: 48px;
+
+    height: 48px;
+
+    border-radius: 14px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 24px;
+
+    font-weight: 900;
+
+    background:
+        linear-gradient(
+            135deg,
+            #25d366,
+            #0a9b62
+        );
+
+}
+
+
+h1 {
+
+    margin: 0;
+
+    font-size: 26px;
+
+}
+
+
+.subtitle {
+
+    color: #82909d;
+
+    font-size: 13px;
+
+}
+
+
+.status {
+
+    padding: 9px 15px;
+
+    border-radius: 30px;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+}
+
+
+.online {
+
+    background: #123d29;
+
+    color: #4ade80;
+
+}
+
+
+.offline {
+
+    background: #3d1717;
+
+    color: #f87171;
+
+}
+
+
+/* GRID */
+
+.grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 18px;
+
+}
+
+
+.card {
+
+    background:
+        rgba(15, 23, 42, .72);
+
+    border:
+        1px solid rgba(255,255,255,.08);
+
+    border-radius: 20px;
+
+    padding: 22px;
+
+    backdrop-filter: blur(20px);
+
+}
+
+
+.full {
+
+    grid-column: 1 / -1;
+
+}
+
+
+.card h2 {
+
+    margin-top: 0;
+
+    font-size: 18px;
+
+}
+
+
+label {
+
+    display: block;
+
+    margin:
+        14px 0 7px;
+
+    color: #a9b5c2;
+
+    font-size: 13px;
+
+}
+
+
+input,
+textarea,
+select {
+
+    width: 100%;
+
+    border:
+        1px solid rgba(255,255,255,.1);
+
+    background:
+        rgba(0,0,0,.3);
+
+    color: white;
+
+    border-radius: 11px;
+
+    padding: 12px;
+
+    outline: none;
+
+}
+
+
+input:focus,
+textarea:focus {
+
+    border-color: #25d366;
+
+}
+
+
+textarea {
+
+    min-height: 120px;
+
+    resize: vertical;
+
+}
+
+
+button {
+
+    border: 0;
+
+    border-radius: 10px;
+
+    padding: 11px 17px;
+
+    margin-top: 14px;
+
+    cursor: pointer;
+
+    font-weight: 700;
+
+}
+
+
+.primary {
+
+    background: #25d366;
+
+    color: #052e16;
+
+}
+
+
+.secondary {
+
+    background:
+        rgba(255,255,255,.1);
+
+    color: white;
+
+}
+
+
+button:hover {
+
+    transform: translateY(-1px);
+
+}
+
+
+.result {
+
+    margin-top: 14px;
+
+    padding: 13px;
+
+    border-radius: 10px;
+
+    background:
+        rgba(0,0,0,.25);
+
+    color: #cbd5e1;
+
+    white-space: pre-wrap;
+
+    word-break: break-word;
+
+}
+
+
+.server {
+
+    color: #25d366;
+
+    word-break: break-all;
+
+}
+
+
+.contact {
+
+    padding: 12px 0;
+
+    border-bottom:
+        1px solid rgba(255,255,255,.07);
+
+}
+
+
+.contactName {
+
+    font-weight: bold;
+
+}
+
+
+.contactNumber {
+
+    color: #8795a5;
+
+    font-size: 12px;
+
+    margin-top: 4px;
+
+}
+
+
+@media(max-width: 750px) {
+
+    .grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+    .full {
+
+        grid-column: auto;
+
+    }
+
+    header {
+
+        align-items: flex-start;
+
+        gap: 15px;
+
+        flex-direction: column;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+<header>
+
+    <div class="logo">
+
+        <div class="logoIcon">
+            W
+        </div>
+
+        <div>
+
+            <h1>WAHA Control</h1>
+
+            <div class="subtitle">
+                WhatsApp API Control Panel
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div
+        id="status"
+        class="status offline"
+    >
+        ● OFFLINE
+    </div>
+
+</header>
+
+
+<div class="grid">
+
+
+<!-- CONNECTION -->
+
+<div class="card">
+
+<h2>🔑 WAHA Connection</h2>
+
+
+<label>WAHA URL</label>
+
+<input
+    id="url"
+    value="https://waha-production-32d0.up.railway.app"
+    placeholder="https://your-waha.up.railway.app"
+>
+
+
+<label>API Key</label>
+
+<input
+    id="key"
+    type="password"
+    placeholder="Enter WAHA API key"
+>
+
+
+<button
+    class="primary"
+    onclick="saveConfig()"
+>
+    Save
+</button>
+
+
+<button
+    class="secondary"
+    onclick="test()"
+>
+    Test Connection
+</button>
+
+
+<div
+    id="connectionResult"
+    class="result"
+>
+    Not tested
+</div>
+
+</div>
+
+
+<!-- SESSION -->
+
+<div class="card">
+
+<h2>📱 Session</h2>
+
+
+<label>Session Name</label>
+
+<input
+    id="session"
+    value="default"
+>
+
+
+<button
+    class="primary"
+    onclick="loadSessions()"
+>
+    Load Sessions
+</button>
+
+
+<div
+    id="sessions"
+    class="result"
+>
+    Click Load Sessions
+</div>
+
+</div>
+
+
+<!-- SEND -->
+
+<div class="card">
+
+<h2>💬 Send Message</h2>
+
+
+<label>Phone Number</label>
+
+<input
+    id="phone"
+    placeholder="919876543210"
+>
+
+
+<label>Message</label>
+
+<textarea
+    id="message"
+    placeholder="Type your message..."
+></textarea>
+
+
+<button
+    class="primary"
+    onclick="sendMessage()"
+>
+    🚀 Send WhatsApp Message
+</button>
+
+
+<div
+    id="sendResult"
+    class="result"
+>
+</div>
+
+</div>
+
+
+<!-- SEARCH -->
+
+<div class="card">
+
+<h2>🔎 Search Number</h2>
+
+
+<label>Phone Number</label>
+
+<input
+    id="searchPhone"
+    placeholder="919876543210"
+>
+
+
+<button
+    class="primary"
+    onclick="checkNumber()"
+>
+    Check WhatsApp
+</button>
+
+
+<div
+    id="searchResult"
+    class="result"
+>
+</div>
+
+</div>
+
+
+<!-- CONTACTS -->
+
+<div class="card full">
+
+<div style="
+display:flex;
+justify-content:space-between;
+align-items:center;
+">
+
+<h2>👥 Contacts</h2>
+
+
+<button
+    class="primary"
+    onclick="loadContacts()"
+>
+    Refresh Contacts
+</button>
+
+</div>
+
+
+<div
+    id="contacts"
+    class="result"
+>
+    No contacts loaded.
+</div>
+
+</div>
+
+
+<!-- SERVER -->
+
+<div class="card full">
+
+<h2>🌐 Server</h2>
+
+<div>
+    Current WAHA server:
+</div>
+
+<div
+    id="server"
+    class="server"
+>
+    Loading...
+</div>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+<script>
+
+
+/* CONFIG */
+
+async function loadConfig() {
+
+    try {
+
+        const r =
+            await fetch("/api/config");
+
+        const data =
+            await r.json();
+
+        if (data.url) {
+
+            document.getElementById("url")
+                .value = data.url;
+
+            document.getElementById("server")
+                .textContent = data.url;
+
+        }
+
+    } catch(e) {}
+
+}
+
+
+async function saveConfig() {
+
+    const url =
+        document.getElementById("url")
+            .value.trim();
+
+    const key =
+        document.getElementById("key")
+            .value.trim();
+
+
+    const r =
+        await fetch("/api/config", {
+
+            method: "POST",
+
+            headers: {
+                "Content-Type":
+                    "application/json"
+            },
+
+            body: JSON.stringify({
+                url,
+                apiKey: key
+            })
+
+        });
+
+
+    const data =
+        await r.json();
+
+
+    if (!r.ok) {
+
+        alert(data.error);
+
+        return;
+
+    }
+
+
+    document.getElementById("server")
+        .textContent = url;
+
+
+    document.getElementById("connectionResult")
+        .textContent =
+        "✓ Configuration saved";
+
+
+}
+
+
+/* TEST */
+
+async function test() {
+
+    setStatus(false, "CHECKING...");
+
+
+    try {
+
+        const r =
+            await fetch("/api/test");
+
+        const data =
+            await r.json();
+
+
+        if (!r.ok) {
+
+            throw new Error(
+                data.error
+            );
+
+        }
+
+
+        setStatus(true);
+
+
+        document.getElementById(
+            "connectionResult"
+        ).textContent =
+            "✓ WAHA is online";
+
+
+    } catch(error) {
+
+        setStatus(false);
+
+
+        document.getElementById(
+            "connectionResult"
+        ).textContent =
+            "✕ " + error.message;
+
+    }
+
+}
+
+
+/* STATUS */
+
+function setStatus(
+    online,
+    text
+) {
+
+    const el =
+        document.getElementById("status");
+
+
+    el.textContent =
+        "● " +
+        (
+            text ||
+            (online
+                ? "ONLINE"
+                : "OFFLINE")
+        );
+
+
+    el.className =
+        "status " +
+        (
+            online
+                ? "online"
+                : "offline"
+        );
+
+}
+
+
+/* SESSION */
+
+async function loadSessions() {
+
+    const box =
+        document.getElementById("sessions");
+
+
+    box.textContent =
+        "Loading...";
+
+
+    try {
+
+        const r =
+            await fetch("/api/sessions");
+
+        const data =
+            await r.json();
+
+
+        box.textContent =
+            JSON.stringify(
+                data,
+                null,
+                2
+            );
+
+
+    } catch(error) {
+
+        box.textContent =
+            error.message;
+
+    }
+
+}
+
+
+/* SEND */
+
+async function sendMessage() {
+
+    const session =
+        document.getElementById("session")
+            .value.trim() ||
+        "default";
+
+
+    const phone =
+        document.getElementById("phone")
+            .value.trim();
+
+
+    const text =
+        document.getElementById("message")
+            .value;
+
+
+    const result =
+        document.getElementById(
+            "sendResult"
+        );
+
+
+    if (!phone || !text.trim()) {
+
+        result.textContent =
+            "Enter phone number and message.";
+
+        return;
+
+    }
+
+
+    result.textContent =
+        "Sending...";
+
+
+    try {
+
+        const r =
+            await fetch("/api/send", {
+
+                method: "POST",
+
+                headers: {
+                    "Content-Type":
+                        "application/json"
+                },
+
+                body: JSON.stringify({
+
+                    session,
+                    phone,
+                    text
+
+                })
+
+            });
+
+
+        const data =
+            await r.json();
+
+
+        if (!r.ok) {
+
+            throw new Error(
+                data.error
+            );
+
+        }
+
+
+        result.textContent =
+            "✓ Message sent successfully";
+
+
+    } catch(error) {
+
+        result.textContent =
+            "✕ " + error.message;
+
+    }
+
+}
+
+
+/* SEARCH */
+
+async function checkNumber() {
+
+    const phone =
+        document.getElementById(
+            "searchPhone"
+        ).value.trim();
+
+
+    const session =
+        document.getElementById(
+            "session"
+        ).value.trim() ||
+        "default";
+
+
+    const result =
+        document.getElementById(
+            "searchResult"
+        );
+
+
+    if (!phone) {
+
+        result.textContent =
+            "Enter phone number.";
+
+        return;
+
+    }
+
+
+    result.textContent =
+        "Checking...";
+
+
+    try {
+
+        const r =
+            await fetch(
+                "/api/check?phone=" +
+                encodeURIComponent(phone) +
+                "&session=" +
+                encodeURIComponent(session)
+            );
+
+
+        const data =
+            await r.json();
+
+
+        if (!r.ok) {
+
+            throw new Error(
+                data.error
+            );
+
+        }
+
+
+        if (data.numberExists) {
+
+            result.textContent =
+                "✓ WhatsApp found\n\n" +
+                "Chat ID: " +
+                data.chatId;
+
+        } else {
+
+            result.textContent =
+                "✕ WhatsApp not found.";
+
+        }
+
+
+    } catch(error) {
+
+        result.textContent =
+            "✕ " + error.message;
+
+    }
+
+}
+
+
+/* CONTACTS */
+
+async function loadContacts() {
+
+    const session =
+        document.getElementById(
+            "session"
+        ).value.trim() ||
+        "default";
+
+
+    const box =
+        document.getElementById(
+            "contacts"
+        );
+
+
+    box.textContent =
+        "Loading contacts...";
+
+
+    try {
+
+        const r =
+            await fetch(
+                "/api/contacts?session=" +
+                encodeURIComponent(session)
+            );
+
+
+        const data =
+            await r.json();
+
+
+        if (!r.ok) {
+
+            throw new Error(
+                data.error
+            );
+
+        }
+
+
+        const contacts =
+            Array.isArray(data)
+                ? data
+                : [];
+
+
+        if (!contacts.length) {
+
+            box.textContent =
+                "No contacts found.";
+
+            return;
+
+        }
+
+
+        box.innerHTML =
+            contacts.map(c => {
+
+                const name =
+                    c.name ||
+                    c.pushname ||
+                    "Unknown";
+
+
+                const number =
+                    c.number ||
+                    c.id ||
+                    "";
+
+
+                return `
+
+                <div class="contact">
+
+                    <div class="contactName">
+                        ${escapeHtml(name)}
+                    </div>
+
+                    <div class="contactNumber">
+                        ${escapeHtml(number)}
+                    </div>
+
+                </div>
+
+                `;
+
+            }).join("");
+
+
+    } catch(error) {
+
+        box.textContent =
+            "✕ " + error.message;
+
+    }
+
+}
+
+
+/* ESCAPE */
+
+function escapeHtml(value) {
+
+    return String(value)
+
+        .replaceAll("&", "&amp;")
+
+        .replaceAll("<", "&lt;")
+
+        .replaceAll(">", "&gt;")
+
+        .replaceAll('"', "&quot;")
+
+        .replaceAll("'", "&#039;");
+
+}
+
+
+/* START */
+
+loadConfig();
+
+setTimeout(
+    test,
+    800
+);
+
+</script>
+
+
+</body>
+
+</html>
